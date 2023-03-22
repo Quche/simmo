@@ -6,4 +6,14 @@ Cette outil part d'une idée simple: il est très difficile de comprendre les pr
 - les périodes d'amortissement,
 - etc.
 
+## Développement et variables
+
+### Liste des variables internes
+
+- **monthlyNetIncome**: salaire net mensuel avant impôts (€)
+- **maxDebtRatio**: Taux d'endettement maximal (égal en général à 0.35)
+- **personnalDeposit**: Apport personnel (€)
+
+- **totalPrice**: prix total de l'acquisition (€)
+
 

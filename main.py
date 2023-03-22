@@ -1,5 +1,8 @@
+# main.py
+
 from simmo.core import cout_mensualite, cout_total_interets, tableau_amortissement
 from simmo.utils import taux_mensuel
+import sys
 
 def main(C0, Ta, Nr):
 
@@ -23,12 +26,15 @@ def main(C0, Ta, Nr):
     # Tableau d'amortissement
     Tp = taux_mensuel(Ta)
     tab_amort = tableau_amortissement(C0, M, Tp, Nr)
-    print(tab_amort)
 
-    # Points d'équilibre
+if __name__ == "__main__":
+    C0 = int(sys.argv[1])
+    Ta = int(sys.argv[2])
+    Nr = int(sys.argv[3])
+    main(C0, Ta, Nr)
 
 
-C0 = 185000
-Ta = 2.8
-Nr = 300
-main(C0, Ta, Nr)
+# C0 = 200000
+# Ta = 3
+# Nr = 300
+# main(C0, Ta, Nr)

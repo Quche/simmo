@@ -17,7 +17,7 @@ def run_project_analysis():
     print(args)
     my_project = Project(
         float(args['yearlyLoanRate']),
-        float(args['loanDuration']),
+        int(args['loanDuration']),
         float(args['loanAmount']),
         float(args['netMonthlyIncome']),
     )

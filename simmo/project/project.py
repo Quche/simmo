@@ -1,5 +1,5 @@
 # define project class
-from simmo.project.utils import compute_monthly_loan_rate, compute_monthly_payment
+from simmo.project.utils import compute_monthly_loan_rate, compute_monthly_payment, amortization_evolution
 
 class Project:
 
@@ -36,31 +36,37 @@ class Project:
         resp['monthlyLoanRate'] = self.monthlyLoanRate
 
         # Compute the monthly payment due
-        self.monthlyLoadCost = compute_monthly_payment(
+        self.monthlyLoanCost = compute_monthly_payment(
             self.loanAmount,
             self.monthlyLoanRate,
             self.loanDuration
         )
-        resp['loanAmount'] = self.loanAmount
-        resp['monthlyLoanRate'] = self.monthlyLoanRate
-        resp['loanDuration'] = self.loanDuration
+        resp['monthlyLoanCost'] = self.monthlyLoanCost
 
         # Total due amount
-        self.totalDueAmount = self.loanDuration * self.monthlyLoadCost
+        self.totalDueAmount = self.loanDuration * self.monthlyLoanCost
         resp['totalDueAmount'] = self.totalDueAmount
 
         # Total cost of the loan
         self.totalLoanCost = self.totalDueAmount - self.loanAmount
         resp['totalLoanCost'] = self.totalLoanCost
 
-        # Debt load ration
-        self.debtLoanRatio = (self.monthlyLoadCost / self.netMonthlyIncome ) * 100
+        # Debt load ratio
+        self.debtLoanRatio = (self.monthlyLoanCost / self.netMonthlyIncome ) * 100
         resp['debtLoanRatio'] = self.debtLoanRatio
+
+        # Amortization table
+        self.amortizationEvolution = amortization_evolution(
+            self.loanAmount,
+            self.monthlyLoanCost,
+            self.monthlyLoanRate,
+            self.loanDuration)
+        resp['amortizationEvolution'] = self.amortizationEvolution
 
         # Log results
         print(f'''
             Mensualités et coûts totaux:
-            - Mensualité calculée: {self.monthlyLoadCost}€.
+            - Mensualité calculée: {self.monthlyLoanCost}€.
             - Coût total du crédit: {self.totalLoanCost}€.
             - Somme totale à rembourser: {self.totalDueAmount}€.
             - Taux d'endettement: {self.debtLoanRatio}%.

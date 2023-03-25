@@ -26,7 +26,6 @@ def run_project_analysis():
     return resp
 
 app.run(
-    # debug=True,
     host=os.environ.get('EXPOSED_IP_ADDRESS', '127.0.0.1'),
     port=int(os.environ.get('PORT', 8080))
     )

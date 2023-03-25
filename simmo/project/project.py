@@ -17,6 +17,12 @@ class Project:
 
     def run(self):
 
+        resp = {}
+        resp['yearlyLoanRate'] = self.yearlyLoanRate
+        resp['loanDuration'] = self.loanDuration
+        resp['loanAmount'] = self.loanAmount
+        resp['netMonthlyIncome'] = self.netMonthlyIncome
+
         # Print generic informations for logs
         print(f'''
             Hypothèses de crédit:
@@ -27,6 +33,7 @@ class Project:
 
         # Compute monthly loan rate
         self.monthlyLoanRate = compute_monthly_loan_rate(self.yearlyLoanRate)
+        resp['monthlyLoanRate'] = self.monthlyLoanRate
 
         # Compute the monthly payment due
         self.monthlyLoadCost = compute_monthly_payment(
@@ -34,15 +41,21 @@ class Project:
             self.monthlyLoanRate,
             self.loanDuration
         )
+        resp['loanAmount'] = self.loanAmount
+        resp['monthlyLoanRate'] = self.monthlyLoanRate
+        resp['loanDuration'] = self.loanDuration
 
         # Total due amount
         self.totalDueAmount = self.loanDuration * self.monthlyLoadCost
+        resp['totalDueAmount'] = self.totalDueAmount
 
         # Total cost of the loan
         self.totalLoanCost = self.totalDueAmount - self.loanAmount
+        resp['totalLoanCost'] = self.totalLoanCost
 
         # Debt load ration
         self.debtLoanRatio = (self.monthlyLoadCost / self.netMonthlyIncome ) * 100
+        resp['debtLoanRatio'] = self.debtLoanRatio
 
         # Log results
         print(f'''
@@ -53,29 +66,4 @@ class Project:
             - Taux d'endettement: {self.debtLoanRatio}%.
             ''')
 
-        return {
-            "yearlyLoanRate": self.yearlyLoanRate,
-            "monthlyLoanCost": self.monthlyLoadCost,
-            "loanDuration": self.loanDuration,
-            "loanAmount": self.loanAmount,
-            "netMonthlyIncome": self.netMonthlyIncome,
-            "monthlyLoanRate": self.monthlyLoanRate,
-            "totalDueAmount": self.totalDueAmount,
-            "totalLoanCost": self.totalLoanCost,
-            "debtLoanRatio": self.debtLoanRatio
-        }
-
-# yearlyLoanRate = 2.34
-# loanDuration = 20*12
-# loanAmount = 150000
-# netMonthlyIncome = 3400
-
-# project = Project(
-#     yearlyLoanRate,
-#     loanDuration,
-#     loanAmount,
-#     netMonthlyIncome
-# )
-
-# t = project.run()
-# print(t)
+        return resp

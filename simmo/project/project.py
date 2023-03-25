@@ -20,9 +20,9 @@ class Project:
         # Print generic informations for logs
         print(f'''
             Hypothèses de crédit:
-            - Somme totale empreintée: {loanAmount}€.
-            - Taux annuel: {yearlyLoanRate}%.
-            - Nombre de mois: {loanDuration}.
+            - Somme totale empreintée: {self.loanAmount}€.
+            - Taux annuel: {self.yearlyLoanRate}%.
+            - Nombre de mois: {self.loanDuration}.
             ''')
 
         # Compute monthly loan rate
@@ -42,7 +42,7 @@ class Project:
         self.totalLoanCost = self.totalDueAmount - self.loanAmount
 
         # Debt load ration
-        self.debtLoanRation = (self.monthlyLoadCost / self.netMonthlyIncome ) * 100
+        self.debtLoanRatio = (self.monthlyLoadCost / self.netMonthlyIncome ) * 100
 
         # Log results
         print(f'''
@@ -50,7 +50,7 @@ class Project:
             - Mensualité calculée: {self.monthlyLoadCost}€.
             - Coût total du crédit: {self.totalLoanCost}€.
             - Somme totale à rembourser: {self.totalDueAmount}€.
-            - Taux d'endettement: {self.debtLoanRation}%.
+            - Taux d'endettement: {self.debtLoanRatio}%.
             ''')
 
         return {
@@ -62,20 +62,20 @@ class Project:
             "monthlyLoanRate": self.monthlyLoanRate,
             "totalDueAmount": self.totalDueAmount,
             "totalLoanCost": self.totalLoanCost,
-            "debtLoanRation": self.debtLoanRation
+            "debtLoanRatio": self.debtLoanRatio
         }
 
-yearlyLoanRate = 2.34
-loanDuration = 20*12
-loanAmount = 150000
-netMonthlyIncome = 3400
+# yearlyLoanRate = 2.34
+# loanDuration = 20*12
+# loanAmount = 150000
+# netMonthlyIncome = 3400
 
-project = Project(
-    yearlyLoanRate,
-    loanDuration,
-    loanAmount,
-    netMonthlyIncome
-)
+# project = Project(
+#     yearlyLoanRate,
+#     loanDuration,
+#     loanAmount,
+#     netMonthlyIncome
+# )
 
-t = project.run()
-print(t)
+# t = project.run()
+# print(t)

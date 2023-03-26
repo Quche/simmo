@@ -1,4 +1,4 @@
-# Simmo back-end
+# core back-end
 
 ## Run the server
 
@@ -23,11 +23,11 @@ python app.py
 
 First, build the image:
 ```bash
-cd simmo
-docker build -t simmo-server .
+cd core
+docker build -t core-server .
 ```
 
 Then run the image (reachable on `127.0.0.1:8082` in this example):
 ```bash
-docker run --network=host --env PORT=8082 simmo-server
+docker run --network=host --env PORT=8082 core-server
 ```

@@ -59,11 +59,3 @@ class Capacity:
         resp['amortizationEvolution'] = self.amortizationEvolution
 
         return resp
-
-yearlyLoanRate = 4
-loanDuration = 300
-maxdebtLoanRatio = 33
-netMonthlyIncome = 3400
-
-my_capa = Capacity(yearlyLoanRate, loanDuration, maxdebtLoanRatio, netMonthlyIncome)
-my_capa.run()

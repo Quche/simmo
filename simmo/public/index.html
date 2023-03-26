@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>Simmo</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <div class="card text-center">
+        <div class="card-header">
+            <p style="font-size: 2em;">
+                Paramètres de votre recherche
+            </p>
+        </div>
+        <div class="card-body">
+
+            <!-- form boxes -->
+            <div class="container">
+
+                <div class="m-4 row">
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Somme à emprunter (€uro)</label>
+                            <input type="text" style="text-align:center" value="1000000" name="loanAmount" class="form-control" id="input_form" placeholder="100000">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-group" >
+                            <label for="formGroupExampleInput">Taux TAEG (%)</label>
+                            <input type="text" style="text-align:center" value="4" name="yearlyLoanRate" class="form-control" id="input_form" placeholder="3.2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-4 row">
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Durée de rembousement (mois)</label>
+                            <input type="text" style="text-align:center" value="300" name="loanDuration" class="form-control" id="input_form" placeholder="300">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <form>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Salaire mensuel net avant impôt (€/mois)</label>
+                                <input type="text" style="text-align:center" value="15000" name="netMonthlyIncome" class="form-control" id="input_form" placeholder="2700">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Launch button -->
+            <div class="m-4 container">
+                <button type="button" id="send_form" class="btn btn-primary">
+                    Lancer la simulation
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card text-center">
+        <div class="card-header">
+            <p style="font-size: 2em;">
+                Résultats
+            </p>
+        </div>
+    </div>
+  </body>
+</html>

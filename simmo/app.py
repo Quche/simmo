@@ -25,7 +25,8 @@ def run_project_analysis():
     resp = make_response(jsonify(output), 200)
     return resp
 
-app.run(
-    host=os.environ.get('EXPOSED_IP_ADDRESS', '127.0.0.1'),
-    port=int(os.environ.get('PORT', 8080))
-    )
+if __name__ == "__main__":
+    app.run(
+        host=os.environ.get('EXPOSED_IP_ADDRESS', '127.0.0.1'),
+        port=int(os.environ.get('PORT', 8080))
+        )

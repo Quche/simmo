@@ -1,5 +1,5 @@
 # define project class
-from simmo.project.utils import compute_monthly_loan_rate, compute_monthly_payment, amortization_evolution
+from project.utils import compute_monthly_loan_rate, compute_monthly_payment, amortization_evolution
 
 class Project:
 

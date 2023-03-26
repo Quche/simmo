@@ -6,6 +6,10 @@ def compute_monthly_payment(loanAmount, periodicLoanRate, loanDuration):
     monthly_payment = (loanAmount * periodicLoanRate/100 * (1+periodicLoanRate/100)**(loanDuration) ) / ( (1 + periodicLoanRate/100)**(loanDuration) - 1 )
     return monthly_payment
 
+def compute_totalDueAmount_from_monthly_payment(monthlyLoanCost, periodicLoanRate, loanDuration):
+    loanAmount = (monthlyLoanCost * ( (1 + periodicLoanRate/100)**(loanDuration) - 1 ) ) / ( periodicLoanRate/100 * (1 + periodicLoanRate/100)**(loanDuration) )
+    return loanAmount
+
 def instant_amortization(remainingLoanDue, monthlyLoanCost, periodicLoanRate):
     interest = remainingLoanDue * periodicLoanRate/100
     capitalAmortization = monthlyLoanCost - interest

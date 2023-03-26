@@ -1,18 +1,17 @@
-# define project class
-from project.utils import compute_monthly_loan_rate, compute_monthly_payment, amortization_evolution
+from project.utils import compute_totalDueAmount_from_monthly_payment, compute_monthly_loan_rate, amortization_evolution
 
-class Project:
+class Capacity:
 
     def __init__(
         self,
         yearlyLoanRate,
         loanDuration,
-        loanAmount,
-        netMonthlyIncome
+        maxdebtLoanRatio,
+        netMonthlyIncome,
     ):
         self.yearlyLoanRate = yearlyLoanRate
         self.loanDuration = loanDuration
-        self.loanAmount = loanAmount
+        self.maxdebtLoanRatio = maxdebtLoanRatio
         self.netMonthlyIncome = netMonthlyIncome
 
     def run(self):
@@ -20,41 +19,36 @@ class Project:
         resp = {}
         resp['yearlyLoanRate'] = self.yearlyLoanRate
         resp['loanDuration'] = self.loanDuration
-        resp['loanAmount'] = self.loanAmount
+        resp['maxdebtLoanRatio'] = self.maxdebtLoanRatio
         resp['netMonthlyIncome'] = self.netMonthlyIncome
 
         # Print generic informations for logs
         print(f'''
             Hypothèses de crédit:
             - Salaire net mensuel: {self.netMonthlyIncome}€.
-            - Somme totale empreintée: {self.loanAmount}€.
+            - Taux d'endettement: {self.maxdebtLoanRatio}€.
             - Taux annuel: {self.yearlyLoanRate}%.
             - Nombre de mois: {self.loanDuration}.
             ''')
 
-        # Compute monthly loan rate
-        self.monthlyLoanRate = compute_monthly_loan_rate(self.yearlyLoanRate)
-        resp['monthlyLoanRate'] = self.monthlyLoanRate
+        # Compute the related monthlyLoanCost
+        self.monthlyLoanCost = (self.maxdebtLoanRatio * self.netMonthlyIncome ) * 1/100
+        resp['monthlyLoanCost'] = self.monthlyLoanCost
 
-        # Compute the monthly payment due
-        self.monthlyLoanCost = compute_monthly_payment(
-            self.loanAmount,
+        # Compute the loanAmount
+        self.monthlyLoanRate = compute_monthly_loan_rate(self.yearlyLoanRate)
+        self.loanAmount = compute_totalDueAmount_from_monthly_payment(
+            self.monthlyLoanCost,
             self.monthlyLoanRate,
             self.loanDuration
         )
-        resp['monthlyLoanCost'] = self.monthlyLoanCost
+        resp['loanAmount'] = self.loanAmount
 
-        # Total due amount
+        # Compute the totalLoanCost
         self.totalDueAmount = self.loanDuration * self.monthlyLoanCost
         resp['totalDueAmount'] = self.totalDueAmount
-
-        # Total cost of the loan
         self.totalLoanCost = self.totalDueAmount - self.loanAmount
         resp['totalLoanCost'] = self.totalLoanCost
-
-        # Debt load ratio
-        self.debtLoanRatio = (self.monthlyLoanCost / self.netMonthlyIncome ) * 100
-        resp['debtLoanRatio'] = self.debtLoanRatio
 
         # Amortization table
         self.amortizationEvolution = amortization_evolution(
@@ -64,13 +58,12 @@ class Project:
             self.loanDuration)
         resp['amortizationEvolution'] = self.amortizationEvolution
 
-        # Log results
-        print(f'''
-            Mensualités et coûts totaux:
-            - Mensualité calculée: {self.monthlyLoanCost}€.
-            - Coût total du crédit: {self.totalLoanCost}€.
-            - Somme totale à rembourser: {self.totalDueAmount}€.
-            - Taux d'endettement: {self.debtLoanRatio}%.
-            ''')
-
         return resp
+
+yearlyLoanRate = 4
+loanDuration = 300
+maxdebtLoanRatio = 33
+netMonthlyIncome = 3400
+
+my_capa = Capacity(yearlyLoanRate, loanDuration, maxdebtLoanRatio, netMonthlyIncome)
+my_capa.run()

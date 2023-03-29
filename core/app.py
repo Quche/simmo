@@ -2,8 +2,10 @@ import os
 from flask import Flask, request, jsonify, make_response
 from project.project import Project
 from project.capacity import Capacity
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/',methods=['GET'])
 def healthz():

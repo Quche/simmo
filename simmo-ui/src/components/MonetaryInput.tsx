@@ -24,11 +24,13 @@ const MonetaryInput: React.FC<MonetaryInputProps> = ({
   inputTitle,
   currencySymbol = '€',
 }) => {
-  const [inputValue, setInputValue] = useState<string>(String(value));
+  const [inputValue, setInputValue] = useState(value);
+
+  const formattedValue = formatNumberWithSpaces(inputValue);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const parsedValue = parseStringToInteger(e.target.value);
-    setInputValue(formatNumberWithSpaces(parsedValue));
+    setInputValue(parsedValue);
     onChange(parsedValue);
   };
 
@@ -41,7 +43,7 @@ const MonetaryInput: React.FC<MonetaryInputProps> = ({
         <input
           className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-6 mb-3 leading-tight focus:outline-none focus:bg-white text-right"
           type="text"
-          value={inputValue}
+          value={formattedValue}
           onChange={handleChange}
           placeholder="Enter amount"
         />

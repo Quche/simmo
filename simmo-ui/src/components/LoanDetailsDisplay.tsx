@@ -21,7 +21,9 @@ const LoanDetailsDisplay: React.FC<LoanDetailsProps> = ({ loanDetails }) => {
     <div className="flex-auto">
       <ul>
         <li>Montant des mensualités : {loanDetails.monthlyLoanCost.toFixed(2)} €/mois</li>
-        <li className={debtRatioStyle}>Taux d'endettement : {loanDetails.debtLoanRatio.toFixed(2)} %</li>
+        <li className={debtRatioStyle}>
+          Taux d'endettement : {loanDetails.debtLoanRatio.toFixed(2)} %
+        </li>
       </ul>
     </div>
   );

@@ -7,11 +7,7 @@ const exportAmortizationCSV = (amortizationEvolution: JSON) => {
         quoteStrings: '"',
         decimalSeparator: '.',
         showLabels: true,
-        showTitle: false,
-        title: 'tableauAmortissement',
-        fileName: 'tableauAmortissement.csv',
-        useTextFile: false,
-        useBom: true,
+        filename: 'tableau_amortissement',
         useKeysAsHeaders: true,
     };
 

@@ -1,3 +1,5 @@
+import json
+
 def compute_monthly_loan_rate(Ta):
     periodicLoanRate = (1 + Ta/100) ** (1/12) - 1
     return periodicLoanRate * 100
@@ -17,15 +19,19 @@ def instant_amortization(remainingLoanDue, monthlyLoanCost, periodicLoanRate):
     return interest, capitalAmortization, remainingLoan
 
 def amortization_evolution(loanAmount, monthlyLoanCost, periodicLoanRate, loanDuration):
-    amortization_evolution = {}
+    amortization_evolution = []
     C = loanAmount
     for i in range(loanDuration):
         interest, capitalAmortization, remainingLoan = instant_amortization(C,monthlyLoanCost,periodicLoanRate)
-        temp_amortization_evolution = {
+        item = {
             'month': i + 1,
             'interest': interest,
             'capitalAmortization': capitalAmortization
         }
-        amortization_evolution[i + 1] = temp_amortization_evolution
+        amortization_evolution.append(item)
         C = remainingLoan
-    return amortization_evolution
+    return (json.loads(json.dumps(amortization_evolution)))
+
+# Function that returns json from string 
+def jsonify(string):
+    return json.loads(string)

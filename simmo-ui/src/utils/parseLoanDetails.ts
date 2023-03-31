@@ -16,6 +16,7 @@ function parseLoanDetails(loanDetails: unknown): LoanDetails {
   return {
     debtLoanRatio: loanDetails.debtLoanRatio,
     monthlyLoanCost: loanDetails.monthlyLoanCost,
+    amortizationEvolution: loanDetails.amortizationEvolution
   };
 }
 

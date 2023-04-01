@@ -6,6 +6,7 @@ import RateInput from './components/RateInput';
 import { parseLoanDetails } from './utils/parseLoanDetails';
 import ExportLoanDetails, { AmortizationItem } from './components/ExportLoanDetails';
 import { parseAmortization } from './utils/parseAmortization';
+import AmortizationDisplay from './components/AmortizationDisplay';
 
 function App() {
   const [totalInvestment, setTotalInvestment] = useState(300_000);
@@ -67,6 +68,7 @@ function App() {
         Calculer votre projet
       </button>
       <LoanDetailsDisplay loanDetails={loanResults} />
+      <AmortizationDisplay amortizationEvolution={amortizationResults} />
       <ExportLoanDetails amortizationEvolution={amortizationResults} />
     </div>
   );

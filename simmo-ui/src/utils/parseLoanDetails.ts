@@ -1,22 +1,27 @@
 import { LoanDetails } from '../components/LoanDetailsDisplay';
 
-function parseLoanDetails(loanDetails: unknown): LoanDetails {
-  if (typeof loanDetails !== 'object' || loanDetails === null) {
+function parseLoanDetails(loanDetailsResponse: unknown): LoanDetails {
+  if (typeof loanDetailsResponse !== 'object' || loanDetailsResponse === null) {
     throw new Error('Invalid loan details');
   }
 
-  if (!('debtLoanRatio' in loanDetails) || typeof loanDetails.debtLoanRatio !== 'number') {
+  if (
+    !('debtLoanRatio' in loanDetailsResponse) ||
+    typeof loanDetailsResponse.debtLoanRatio !== 'number'
+  ) {
     throw new Error('Invalid debtLoanRatio');
   }
 
-  if (!('monthlyLoanCost' in loanDetails) || typeof loanDetails.monthlyLoanCost !== 'number') {
+  if (
+    !('monthlyLoanCost' in loanDetailsResponse) ||
+    typeof loanDetailsResponse.monthlyLoanCost !== 'number'
+  ) {
     throw new Error('Invalid monthlyLoanCost');
   }
 
   return {
-    debtLoanRatio: loanDetails.debtLoanRatio,
-    monthlyLoanCost: loanDetails.monthlyLoanCost,
-    amortizationEvolution: loanDetails.amortizationEvolution
+    debtLoanRatio: loanDetailsResponse.debtLoanRatio,
+    monthlyLoanCost: loanDetailsResponse.monthlyLoanCost,
   };
 }
 

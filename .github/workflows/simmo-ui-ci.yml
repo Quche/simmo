@@ -30,4 +30,4 @@ jobs:
         run: |
           cd simmo-ui
           npm ci
-          npm test
+          npm run test:ci

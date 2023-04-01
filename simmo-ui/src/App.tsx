@@ -4,13 +4,18 @@ import LoanDetailsDisplay, { LoanDetails } from './components/LoanDetailsDisplay
 import MonetaryInput from './components/MonetaryInput';
 import RateInput from './components/RateInput';
 import { parseLoanDetails } from './utils/parseLoanDetails';
+import ExportLoanDetails, { AmortizationItem } from './components/ExportLoanDetails';
+import { parseAmortization } from './utils/parseAmortization';
 
 function App() {
   const [totalInvestment, setTotalInvestment] = useState(300_000);
   const [monthlyRevenues, setMonthlyRevenues] = useState(3_000);
   const [durationInMonths, setDurationInMonths] = useState(300);
   const [annualRate, setAnnualRate] = useState(2.9);
-  const [projectResults, setProjectResults] = useState<LoanDetails | undefined>(undefined);
+  const [loanResults, setLoanResults] = useState<LoanDetails | undefined>(undefined);
+  const [amortizationResults, setamortizationResults] = useState<AmortizationItem[] | undefined>(
+    undefined,
+  );
   const currencySymbol = '€';
 
   const onClick = async () => {
@@ -24,7 +29,9 @@ function App() {
     const response = await fetch(url, {
       method: 'POST',
     });
-    setProjectResults(parseLoanDetails(await response.json()));
+    const data = await response.json();
+    setLoanResults(parseLoanDetails(data));
+    setamortizationResults(parseAmortization(data));
   };
 
   return (
@@ -59,7 +66,8 @@ function App() {
       >
         Calculer votre projet
       </button>
-      <LoanDetailsDisplay loanDetails={projectResults} />
+      <LoanDetailsDisplay loanDetails={loanResults} />
+      <ExportLoanDetails amortizationEvolution={amortizationResults} />
     </div>
   );
 }

@@ -37,30 +37,38 @@ function App() {
 
   return (
     <div className="App">
-      <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-2">
+        <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-2">
         Simmo
-      </h2>
-      <div className="flex-auto">
-        <MonetaryInput
-          currencySymbol="€"
-          value={monthlyRevenues}
-          onChange={setMonthlyRevenues}
-          inputTitle="Revenus mensuels"
-        />
-        <MonetaryInput
-          currencySymbol={currencySymbol}
-          value={totalInvestment}
-          onChange={setTotalInvestment}
-          inputTitle="Somme à emprunter"
-        />
-        <MonetaryInput
-          currencySymbol=""
-          value={durationInMonths}
-          onChange={setDurationInMonths}
-          inputTitle="Durée de remboursement (en mois)"
-        />
-        <RateInput rate={annualRate} onChange={setAnnualRate} inputTitle="Taux annuel" />
-      </div>
+        </h2>
+        <div className="grid grid-rows-2 grid-flow-col gap-4">
+            <div>
+                <MonetaryInput
+                    currencySymbol="€"
+                    value={monthlyRevenues}
+                    onChange={setMonthlyRevenues}
+                    inputTitle="Revenus mensuels"
+                />
+            </div>
+            <div>
+                <MonetaryInput
+                    currencySymbol={currencySymbol}
+                    value={totalInvestment}
+                    onChange={setTotalInvestment}
+                    inputTitle="Somme à emprunter"
+                />
+            </div>
+            <div>
+                <MonetaryInput
+                    currencySymbol=""
+                    value={durationInMonths}
+                    onChange={setDurationInMonths}
+                    inputTitle="Durée de remboursement (en mois)"
+                />
+            </div>
+            <div>
+                <RateInput rate={annualRate} onChange={setAnnualRate} inputTitle="Taux annuel" />
+            </div>
+        </div>
       <button
         className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         onClick={onClick}

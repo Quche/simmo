@@ -1,6 +1,4 @@
 import { Head } from "$fresh/runtime.ts";
-import Counter from "../islands/Counter.tsx";
-import RateForm from "../islands/project-form.tsx";
 
 export default function Home() {
   return (
@@ -10,11 +8,14 @@ export default function Home() {
       </Head>
       <div class="p-4 mx-auto max-w-screen-md">
         <p class="my-6">
-          Welcome to `fresh`. Try updating this message in the
-          ./routes/index.tsx file, and refresh.
+          Welcome to simmo !
         </p>
-        <Counter start={3} />
-        <RateForm />
+        <a
+          href="/project-form"
+          class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
+        >
+          Go to project form
+        </a>
       </div>
     </>
   );

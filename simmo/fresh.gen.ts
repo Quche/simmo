@@ -3,30 +3,19 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import config from "./deno.json" assert { type: "json" };
-import * as $0 from "./routes/[name].tsx";
-import * as $1 from "./routes/api/joke.ts";
-import * as $2 from "./routes/index.tsx";
-import * as $3 from "./routes/project.tsx";
-import * as $4 from "./routes/search.tsx";
-import * as $5 from "./routes/subscribe.tsx";
-import * as $$0 from "./islands/Counter.tsx";
-import * as $$1 from "./islands/project-form.tsx";
-import * as $$2 from "./islands/rate-input.tsx";
+import * as $0 from "./routes/hello/[name].tsx";
+import * as $1 from "./routes/index.tsx";
+import * as $2 from "./routes/project-form.tsx";
+import * as $3 from "./routes/project-results.tsx";
 
 const manifest = {
   routes: {
-    "./routes/[name].tsx": $0,
-    "./routes/api/joke.ts": $1,
-    "./routes/index.tsx": $2,
-    "./routes/project.tsx": $3,
-    "./routes/search.tsx": $4,
-    "./routes/subscribe.tsx": $5,
+    "./routes/hello/[name].tsx": $0,
+    "./routes/index.tsx": $1,
+    "./routes/project-form.tsx": $2,
+    "./routes/project-results.tsx": $3,
   },
-  islands: {
-    "./islands/Counter.tsx": $$0,
-    "./islands/project-form.tsx": $$1,
-    "./islands/rate-input.tsx": $$2,
-  },
+  islands: {},
   baseUrl: import.meta.url,
   config,
 };

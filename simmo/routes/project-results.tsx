@@ -49,37 +49,27 @@ export default function ProjectResults(
           {projectForm.projectName}
         </h1>
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-          {projectForm.totalAmount.toLocaleString('fr-FR')}€ over {projectForm.loanDuration}
-          {" "}
-          years at {projectForm.yearlyLoanRate}%
+          Borrowing {projectForm.totalAmount.toLocaleString("fr-FR")}€ over{" "}
+          {projectForm.loanDuration} years at {projectForm.yearlyLoanRate}%.
         </p>
       </div>
 
-      <div class="flex flex-wrap space space-x-4">
-        <div class="flex flex-wrap -m-4">
-          <div class="p-4 lg:w-1/2">
-            <div class="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
-              <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                MONTHLY PAYMENT
-              </h2>
-              <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
-                {projectResults.monthlyLoanCost.toLocaleString('fr-FR')}€
-              </h1>
-            </div>
-          </div>
+      <div class="flex flex-wrap justify-center">
+        <div class="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 m-4 rounded-lg overflow-hidden text-center relative">
+          <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+            MONTHLY PAYMENT
+          </h2>
+          <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
+            {projectResults.monthlyLoanCost.toLocaleString("fr-FR")}€
+          </h1>
         </div>
-
-        <div class="flex flex-wrap -m-4">
-          <div class="p-4 lg:w-1/2">
-            <div class="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
-              <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                DEBT RATIO
-              </h2>
-              <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
-                {projectResults.debtLoanRatio.toLocaleString('fr-FR')} %
-              </h1>
-            </div>
-          </div>
+        <div class="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 m-4 rounded-lg overflow-hidden text-center relative">
+          <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+            MONTHLY DEBT RATIO
+          </h2>
+          <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
+            {projectResults.debtLoanRatio.toLocaleString("fr-FR")} %
+          </h1>
         </div>
       </div>
     </section>

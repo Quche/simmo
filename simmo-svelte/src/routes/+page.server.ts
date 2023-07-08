@@ -1,4 +1,4 @@
-import type { Actions } from './$types';
+import type { Actions } from './loan/$types';
 import { computeProjectResults } from '$lib/project';
 
 export const actions = {

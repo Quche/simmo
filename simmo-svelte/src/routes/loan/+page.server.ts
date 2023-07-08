@@ -2,7 +2,7 @@ import type { Actions } from './$types';
 import { computeProjectResults } from '$lib/project';
 
 export const actions = {
-  compute: async ({ request }) => {
+  default: async ({ request }) => {
     const data = await request.formData();
 
     const results = computeProjectResults({

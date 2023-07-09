@@ -1,4 +1,4 @@
-import type { Actions } from './loan/$types';
+import type { Actions } from '@sveltejs/kit';
 import { computeProjectResults } from '$lib/project';
 
 export const actions = {

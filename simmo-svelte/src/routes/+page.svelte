@@ -36,20 +36,30 @@
 </form>
 
 {#if form?.body}
-  <section>
+  <section class="results">
     <div>
-      <h2>Taux d'endettement</h2>
-      <p>{form.body.results.debtLoanRatio} %</p>
+      <div>
+        <h2>Taux d'endettement</h2>
+        <p>{form.body.results.debtLoanRatio} %</p>
+      </div>
+      <div>
+        <h2>Mensualités</h2>
+        <p>{form.body.results.monthlyLoanCost.toFixed(0)} €</p>
+      </div>
+      <div>
+        <h2>Total des intérets</h2>
+        <p>
+          {form.body.results.totalLoanCost.toFixed(0)} €
+        </p>
+      </div>
     </div>
     <div>
-      <h2>Mensualités</h2>
-      <p>{form.body.results.monthlyLoanCost.toFixed(0)} €</p>
-    </div>
-    <div>
-      <h2>Total des intérets</h2>
-      <p>
-        {form.body.results.totalLoanCost.toFixed(0)} €
-      </p>
+      <a
+        class="advanced"
+        hidden={true}
+        href={`/advanced?amount=${amount}&duration=${duration}&rate=${rate}&income=${income}`}
+        >Mode avancé 🛠️</a
+      >
     </div>
   </section>
 {/if}
@@ -102,12 +112,35 @@
 
   section > div {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
   }
 
-  section > div > p {
+  section > div > div > p {
     font-size: 2rem;
     font-weight: bold;
+    text-align: center;
+  }
+
+  .results {
+    margin-top: 2rem;
+    flex-direction: column;
+  }
+
+  a {
+    display: block;
+    margin: 2rem auto;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    width: 25%;
+    background-color: #c7c689;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: black;
   }
 </style>

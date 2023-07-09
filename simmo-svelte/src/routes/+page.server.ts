@@ -15,7 +15,11 @@ export const actions = {
     return {
       status: 200,
       body: {
-        results,
+        results: {
+          debtLoanRatio: results.debtLoanRatio,
+          monthlyLoanCost: results.monthlyLoanCost,
+          totalLoanCost: results.amortizationTable.reduce((acc, { interest }) => acc + interest, 0),
+        },
         settings: {
           rate: Number(data.get('rate')),
           duration: Number(data.get('duration')),

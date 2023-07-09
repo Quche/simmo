@@ -1,4 +1,4 @@
-import { computeMonthlyLoanRate, computeMonthlyPayment } from './utils';
+import { computeMonthlyLoanRate, computeMonthlyPayment, amortizationEvolution } from './utils';
 
 export interface ProjectSettings {
   yearlyLoanRate: number;
@@ -10,6 +10,7 @@ export interface ProjectSettings {
 export interface ProjectResults {
   debtLoanRatio: number;
   monthlyLoanCost: number;
+  amortizationTable: ReturnType<typeof amortizationEvolution>;
 }
 
 export const computeProjectResults = (settings: ProjectSettings): ProjectResults => {
@@ -21,18 +22,19 @@ export const computeProjectResults = (settings: ProjectSettings): ProjectResults
     monthlyLoanRate,
     loanDurationInMonths
   );
- /*  const totalDueAmount = loanDurationInMonths * monthlyLoanCost; */
+  /*  const totalDueAmount = loanDurationInMonths * monthlyLoanCost; */
   /* const totalLoanCost = totalDueAmount - settings.totalAmount; */
   const debtLoanRatio = (monthlyLoanCost / settings.netMonthlyIncome) * 100;
-  /*   const amortizationTable = amortizationEvolution(
+  const amortizationTable = amortizationEvolution(
     settings.totalAmount,
     monthlyLoanCost,
     monthlyLoanRate,
-    loanDurationInMonths,
-  ); */
+    loanDurationInMonths
+  );
 
   return {
     debtLoanRatio: Number(debtLoanRatio.toFixed(2)),
     monthlyLoanCost: Number(monthlyLoanCost.toFixed(2)),
+    amortizationTable: amortizationTable,
   };
 };

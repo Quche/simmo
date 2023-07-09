@@ -9,6 +9,8 @@
   let income = form?.body?.settings.income || 2000;
 </script>
 
+<h1>Simmo 🍟</h1>
+
 <form method="post">
   <label>
     Montant emprunté
@@ -58,6 +60,10 @@
   * {
     box-sizing: border-box;
     font-family: 'Courier New', Courier, monospace;
+  }
+
+  h1 {
+    text-align: center;
   }
 
   input {

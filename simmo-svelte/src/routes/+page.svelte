@@ -43,6 +43,14 @@
       <h2>Mensualités</h2>
       <p>{form.body.results.monthlyLoanCost} €</p>
     </div>
+    <div>
+      <h2>Total des intérets</h2>
+      <p>
+        {form.body.results.amortizationTable
+          .reduce((sum, item) => sum + item.interest, 0)
+          .toFixed(0)} €
+      </p>
+    </div>
   </section>
 {/if}
 

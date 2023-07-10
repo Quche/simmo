@@ -1,6 +1,11 @@
 <script lang="ts">
   import type { PageData } from './$types';
   import Input from './Input.svelte';
+  import Results from './Results.svelte';
+  import { deserialize } from '$app/forms';
+  import type { ActionResult } from '@sveltejs/kit';
+
+  let form: HTMLFormElement;
 
   export let data: PageData;
 
@@ -8,52 +13,77 @@
   let duration = Number(data.params.duration) || 20;
   let rate = Number(data.params.rate) || 3;
   let income = Number(data.params.income) || 2000;
+
+  let newResults = null;
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    formData.append('amount', amount.toString());
+    formData.append('duration', duration.toString());
+    formData.append('rate', rate.toString());
+    formData.append('income', income.toString());
+
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+    });
+    const result: ActionResult = deserialize(await response.text());
+    newResults = result.data.body.results;
+  };
 </script>
 
 <h1>Simmo turbo 🍟</h1>
 
-<div>
-  <h2>Valeurs initiales</h2>
-  <div>
-    <p><b>Taux d'endettement: </b>{data.params.initialResults.debtLoanRatio} %</p>
-    <p><b>Mensualités: </b>{data.params.initialResults.monthlyLoanCost.toFixed(0)} €</p>
-    <p><b>Cout du crédit: </b>{data.params.initialResults.totalLoanCost.toFixed(0)} €</p>
-  </div>
+<div class="container">
+  <Results initialResults={data.params.initialResults} {newResults} />
 
-  <form method="post">
-    <label>
-      <span>Montant emprunté</span>
-      <Input bind:value={amount} step={1000} />
-    </label>
+  <form bind:this={form} method="post" on:submit|preventDefault={handleSubmit}>
+    <Input
+      label={'Montant emprunté'}
+      name={'amount'}
+      bind:value={amount}
+      step={1000}
+      on:change={handleSubmit}
+    />
 
-    <label>
-      Durée du pret en années
-      <Input bind:value={duration} />
-    </label>
+    <Input
+      label={'Durée du pret en années'}
+      name={'duration'}
+      bind:value={duration}
+      on:change={handleSubmit}
+    />
 
-    <label>
-      Taux annuel
-      <Input bind:value={rate} step={0.05} />
-    </label>
+    <Input
+      label={'Taux annuel'}
+      name={'rate'}
+      bind:value={rate}
+      step={0.05}
+      on:change={handleSubmit}
+    />
 
-    <label>
-      Revenus mensuels nets avant impots
-      <Input bind:value={income} step={50} />
-    </label>
+    <Input
+      label={'Revenus mensuels nets'}
+      name={'income'}
+      bind:value={income}
+      step={50}
+      on:change={handleSubmit}
+    />
   </form>
 </div>
 
 <style>
+  div.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
   h1 {
     text-align: center;
   }
 
   form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 1rem;
-  }
-
-  input[type='range'] {
   }
 </style>

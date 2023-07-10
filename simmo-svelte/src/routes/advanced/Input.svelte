@@ -25,26 +25,58 @@
 </div>
 
 <style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
   div.container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    align-items: flex-start;
   }
 
   div.input {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding: 1rem;
+    justify-content: start;
   }
 
   label {
-    font-size: 1.3rem;
     text-align: center;
+    padding-bottom: 0.5rem;
   }
 
   input {
     margin: auto 0.5rem;
-    width: 50%;
+    display: block;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    width: 100%;
+  }
+
+  button {
+    display: block;
+    margin: auto 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: #ccc;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  button:hover {
+    background-color: #aaa;
+  }
+
+  button:active {
+    background-color: #888;
   }
 </style>

@@ -35,8 +35,6 @@
 <h1>Simmo turbo 🍟</h1>
 
 <div class="container">
-  <Results initialResults={data.params.initialResults} {newResults} />
-
   <form bind:this={form} method="post" on:submit|preventDefault={handleSubmit}>
     <Input
       label={'Montant emprunté'}
@@ -69,9 +67,15 @@
       on:change={handleSubmit}
     />
   </form>
+  <Results initialResults={data.params.initialResults} {newResults} />
 </div>
 
 <style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
   div.container {
     display: flex;
     flex-direction: column;
@@ -83,7 +87,9 @@
 
   form {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 1rem;
+    max-width: 30rem;
+    margin: 0 auto;
   }
 </style>

@@ -1,13 +1,10 @@
 <script lang="ts">
-  type Results = {
-    debtLoanRatio: number;
-    monthlyLoanCost: number;
-    totalLoanCost: number;
-  };
-  export let initialResults: Results;
-  export let newResults: Results | null = null;
+  import type { LoanResults } from './types';
 
-  let deltas: Results;
+  export let initialResults: LoanResults;
+  export let newResults: LoanResults | null = null;
+
+  let deltas: LoanResults;
 
   $: if (newResults) {
     deltas = {

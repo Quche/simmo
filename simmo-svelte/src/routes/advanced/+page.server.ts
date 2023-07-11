@@ -1,7 +1,8 @@
-import { computeProjectResults } from '$lib/project';
-import type { Actions } from '@sveltejs/kit';
+import type { PageServerLoad, Actions } from './$types';
 
-export function load({ url }) {
+import { computeProjectResults } from '$lib/project';
+
+export const load = (async ({ url }) => {
   const results = computeProjectResults({
     yearlyLoanRate: Number(url.searchParams.get('rate')),
     loanDuration: Number(url.searchParams.get('duration')),
@@ -22,7 +23,7 @@ export function load({ url }) {
       },
     },
   };
-}
+}) satisfies PageServerLoad;
 
 export const actions = {
   default: async ({ request }) => {

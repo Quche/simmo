@@ -83,7 +83,14 @@
   div.results {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .results > div {
+    padding: 2rem;
   }
 
   div.results > div > p {

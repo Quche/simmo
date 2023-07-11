@@ -1,14 +1,22 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import type { HTMLInputAttributes } from 'svelte/elements';
 
-  export let value: number;
-  export let step: number = 1;
+  interface $$Props extends HTMLInputAttributes {
+    label: string;
+    name: string;
+    value: number;
+    step?: number;
+  }
+
   export let label: string;
   export let name: string;
+  export let value: number;
+  export let step: number = 1;
 
-  const dispatch = createEventDispatcher();
-
-  $: dispatch('change', { value, name });
+  const updateValue = (newValue: number) => {
+    if (newValue < 0) return;
+    value = roundToStep(newValue);
+  };
 
   const roundToStep = (value: number) => {
     return parseFloat((Math.round(value / step) * step).toFixed(2));
@@ -16,11 +24,11 @@
 </script>
 
 <div class="container">
-  <label for="input">{label}</label>
+  <label for={name}>{label}</label>
   <div class="input">
-    <button on:click|preventDefault={() => (value = roundToStep(value - step))}>-</button>
-    <input type="number" bind:value id={name} {name} />
-    <button on:click|preventDefault={() => (value = roundToStep(value + step))}>+</button>
+    <button on:click|preventDefault={() => updateValue(value - step)}>-</button>
+    <input type="number" bind:value id={name} {name} {step} min="0" {...$$restProps} />
+    <button on:click|preventDefault={() => updateValue(value + step)}>+</button>
   </div>
 </div>
 

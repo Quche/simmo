@@ -37,7 +37,7 @@
 
 {#if form?.body}
   <section class="results">
-    <div>
+    <div class="results-items">
       <div>
         <h2>Taux d'endettement</h2>
         <p>{form.body.results.debtLoanRatio} %</p>
@@ -86,8 +86,8 @@
 
   form {
     max-width: 30rem;
-    margin: auto;
-    margin-top: 2rem;
+    margin: 2rem auto;
+    padding: 0 2rem;
   }
 
   button {
@@ -123,8 +123,20 @@
   }
 
   .results {
-    margin-top: 2rem;
+    margin: 2rem auto;
     flex-direction: column;
+  }
+
+  .results-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .results-items > div {
+    padding: 0 2rem;
   }
 
   a {
@@ -134,7 +146,7 @@
     border: 1px solid #ccc;
     border-radius: 0.25rem;
     padding: 0.5rem;
-    width: 25%;
+    width: min(75%, 15rem);
     background-color: #c7c689;
     cursor: pointer;
     font-size: 1rem;

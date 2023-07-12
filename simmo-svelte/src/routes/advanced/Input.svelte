@@ -1,21 +1,25 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   import type { HTMLInputAttributes } from 'svelte/elements';
 
   interface $$Props extends HTMLInputAttributes {
     label: string;
     name: string;
-    value: number;
+    inputValue: number;
     step?: number;
   }
 
   export let label: string;
   export let name: string;
-  export let value: number;
+  export let inputValue: number;
   export let step: number = 1;
+
+  const dispatch = createEventDispatcher();
 
   const updateValue = (newValue: number) => {
     if (newValue < 0) return;
-    value = roundToStep(newValue);
+    inputValue = roundToStep(newValue);
+    dispatch('change', inputValue);
   };
 
   const roundToStep = (value: number) => {
@@ -26,9 +30,18 @@
 <div class="container">
   <label for={name}>{label}</label>
   <div class="input">
-    <button on:click|preventDefault={() => updateValue(value - step)}>-</button>
-    <input type="number" bind:value id={name} {name} {step} min="0" {...$$restProps} />
-    <button on:click|preventDefault={() => updateValue(value + step)}>+</button>
+    <button on:click|preventDefault={() => updateValue(inputValue - step)}>-</button>
+    <input
+      type="number"
+      bind:value={inputValue}
+      id={name}
+      {step}
+      min="0"
+      {...$$restProps}
+      on:change={() => dispatch('change')}
+      on:input={() => dispatch('change')}
+    />
+    <button on:click|preventDefault={() => updateValue(inputValue + step)}>+</button>
   </div>
 </div>
 

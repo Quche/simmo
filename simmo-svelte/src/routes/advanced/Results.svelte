@@ -14,11 +14,32 @@
     };
   }
 
-  const formatDelta = (delta: number) => {
-    if (delta > 0) {
-      return `(+${delta.toFixed(2)})`;
-    }
-    return `(${delta.toFixed(2)})`;
+  const formatMonthlyLoacCoast = (cost: number, sign = false) => {
+    return cost.toLocaleString('fr-FR', {
+      maximumFractionDigits: 0,
+      signDisplay: sign ? 'always' : 'auto',
+      style: 'currency',
+      currency: 'EUR',
+      currencyDisplay: 'symbol',
+    });
+  };
+
+  const formatDebtRatio = (ratio: number, sign = false) => {
+    return (ratio / 100).toLocaleString('fr-FR', {
+      maximumFractionDigits: 2,
+      signDisplay: sign ? 'always' : 'auto',
+      style: 'percent',
+    });
+  };
+
+  const formatLoanCost = (cost: number, sign = false) => {
+    return cost.toLocaleString('fr-FR', {
+      maximumFractionDigits: 0,
+      signDisplay: sign ? 'always' : 'auto',
+      style: 'currency',
+      currency: 'EUR',
+      currencyDisplay: 'symbol',
+    });
   };
 
   const deltaCssClasses = (delta: number) => {
@@ -34,12 +55,12 @@
     <h2>Mensualités</h2>
     <p>
       {#if newResults && deltas.monthlyLoanCost !== 0}
-        <span class="value">{newResults.monthlyLoanCost} €</span>
+        <span class="value">{formatMonthlyLoacCoast(newResults.monthlyLoanCost)}</span>
         <span class={deltaCssClasses(deltas.monthlyLoanCost)}
-          >{formatDelta(deltas.monthlyLoanCost)}</span
+          >{`(${formatMonthlyLoacCoast(deltas.monthlyLoanCost, true)})`}</span
         >
       {:else}
-        <span class="value">{initialResults.monthlyLoanCost} €</span>
+        <span class="value">{formatMonthlyLoacCoast(initialResults.monthlyLoanCost)}</span>
       {/if}
     </p>
   </div>
@@ -47,12 +68,12 @@
     <h2>Taux d'endettement</h2>
     <p>
       {#if newResults && deltas.debtLoanRatio !== 0}
-        <span class="value">{newResults.debtLoanRatio} %</span>
+        <span class="value">{formatDebtRatio(newResults.debtLoanRatio)}</span>
         <span class={deltaCssClasses(deltas.debtLoanRatio)}
-          >{formatDelta(deltas.debtLoanRatio)}</span
+          >{`(${formatDebtRatio(deltas.debtLoanRatio, true)})`}</span
         >
       {:else}
-        <span class="value">{initialResults.debtLoanRatio} %</span>
+        <span class="value">{formatDebtRatio(initialResults.debtLoanRatio)}</span>
       {/if}
     </p>
   </div>
@@ -60,12 +81,12 @@
     <h2>Total des intérets</h2>
     <p>
       {#if newResults && deltas.totalLoanCost !== 0}
-        <span class="value">{newResults.totalLoanCost.toFixed(0)} €</span>
+        <span class="value">{formatLoanCost(newResults.totalLoanCost)}</span>
         <span class={deltaCssClasses(deltas.totalLoanCost)}
-          >{formatDelta(deltas.totalLoanCost)}</span
+          >{`(${formatLoanCost(deltas.totalLoanCost, true)})`}</span
         >
       {:else}
-        <span class="value">{initialResults.totalLoanCost.toFixed(0)} €</span>
+        <span class="value">{formatLoanCost(initialResults.totalLoanCost)}</span>
       {/if}
     </p>
   </div>

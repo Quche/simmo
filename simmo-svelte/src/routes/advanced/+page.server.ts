@@ -1,13 +1,15 @@
 import type { PageServerLoad } from './$types';
 
-import { computeProjectResults } from '$lib/project';
+import { computeLoanResults } from '$lib/loan';
+import { toPercentage } from '$lib/types/rate';
+import { toYear } from '$lib/types/time';
 
 export const load = (async ({ url }) => {
-  const results = computeProjectResults({
-    yearlyLoanRate: Number(url.searchParams.get('rate')),
-    loanDuration: Number(url.searchParams.get('duration')),
-    totalAmount: Number(url.searchParams.get('amount')),
-    netMonthlyIncome: Number(url.searchParams.get('income')),
+  const results = computeLoanResults({
+    rate: toPercentage(Number(url.searchParams.get('rate'))),
+    duration: toYear(Number(url.searchParams.get('duration'))),
+    amount: Number(url.searchParams.get('amount')),
+    monthlyIncome: Number(url.searchParams.get('income')),
   });
 
   return {
@@ -17,9 +19,9 @@ export const load = (async ({ url }) => {
       rate: url.searchParams.get('rate'),
       income: url.searchParams.get('income'),
       initialResults: {
-        debtLoanRatio: results.debtLoanRatio,
-        monthlyLoanCost: results.monthlyLoanCost,
-        totalLoanCost: results.amortizationTable.reduce((acc, { interest }) => acc + interest, 0),
+        debtLoanRatio: results.debtRatio,
+        monthlyLoanCost: results.monthlyPayment,
+        totalLoanCost: results.totalCost,
       },
     },
   };

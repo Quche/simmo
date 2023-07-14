@@ -40,7 +40,7 @@
     <div class="results-items">
       <div>
         <h2>Taux d'endettement</h2>
-        <p>{form.body.results.debtLoanRatio} %</p>
+        <p>{form.body.results.debtLoanRatio.toFixed(1)} %</p>
       </div>
       <div>
         <h2>Mensualités</h2>

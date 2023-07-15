@@ -1,4 +1,4 @@
-name: Build and Test React Application
+name: Build and Test Svelte Application
 
 # Controls when the action will run.
 on:
@@ -6,11 +6,11 @@ on:
   push:
     branches: [ master ]
     paths:
-      - 'simmo-ui/**'
+      - 'simmo-svelte/**'
   pull_request:
     branches: [ master ]
     paths:
-      - 'simmo-ui/**'
+      - 'simmo-svelte/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,6 +32,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm ci, build and test
         run: |
-          cd simmo-ui
+          cd simmo-svelte
           npm ci
           npm run test:ci

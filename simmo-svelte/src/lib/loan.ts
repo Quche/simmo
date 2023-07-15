@@ -31,6 +31,6 @@ export const computeLoanResults = (loanRequest: LoanRequest): LoanResults => {
   const { amount, rate, duration, monthlyIncome } = loanRequest;
   const monthlyPayment = computeMonthlyPayment(amount, rate, duration);
   const totalCost = computeTotalLoanCost(amount, duration, monthlyPayment);
-  const debtRatio = toPercentage(monthlyPayment / monthlyIncome * 100);
+  const debtRatio = toPercentage((monthlyPayment / monthlyIncome) * 100);
   return { monthlyPayment, totalCost, debtRatio };
 };

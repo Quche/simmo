@@ -5,6 +5,8 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:svelte/recommended',
     'prettier',
+    'testing-library',
+    'jest-dom',
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
